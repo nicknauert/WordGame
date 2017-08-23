@@ -1,0 +1,103 @@
+/*
+lightblue = #c4ddde
+carbon = #2B2C31
+tan = #FEE0B1
+royalblue = #2B2A60
+*/
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  padding: 50px 100px;
+  background-color: #9fdadd;
+}
+
+.homeMain {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25px;
+}
+
+
+/*============ HOME STYLES ============*/
+
+.wordForm {
+  padding-top: 200px;
+}
+
+.wordBtn {
+  background-color: transparent;
+  font-size: 60px;
+  padding: 20px 25px;
+  border-radius: 7px;
+  border: 3px solid #d11982;
+  font-weight: 500;
+  color: #d11982;
+}
+
+.wordBtn:focus {
+  outline: none;
+}
+
+.wordBtn:hover {
+  color: #e34ea3;
+}
+
+
+/*============ GAME STYLES ============*/
+
+main {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 150px;
+}
+
+.wordCont {
+  font-size: 50px;
+  margin-bottom: 25px;
+  color: #d11982;
+}
+
+label {
+  color: #d11982;
+  font-size: 20px;
+}
+
+input {
+  margin-left: 5px;
+  padding: 1px 5px;
+  font-size: 18px;
+  color: #ed79bb;
+  width: 30px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid #d11982;
+  border-radius: 5px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.usedLetters {
+  margin-top: 50px;
+  color: #d11982;
+}
+
+.guessedUl {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.guessedUl>li {
+  list-style: none;
+  text-transform: uppercase;
+}

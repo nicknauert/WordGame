@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Word!</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main>
+      <div class="wordCont">
+        <h2>
+          {{#word}}
+            {{display}}
+          {{/word}}
+        </h2>
+        {{^word}}
+        <p>Word Error</p>
+        {{/word}}
+      </div>
+      <form class="inputForm" action="/game" method="post" >
+        <label for="guess">Letter</label><input autocomplete="off"autofocus="true" maxlength="1" type="text" name="guess" value=""><p class='guesses'>Guesses: {{}}</p>
+      </form>
+      <div class="usedLetters">
+        <h3>Guessed Letters</h3>
+        <ul class="guessedUl">
+          {{#letters}}
+            <li>{{print}}</li>
+          {{/letters}}
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>
