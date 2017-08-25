@@ -7,6 +7,7 @@
   </head>
   <body>
     <main>
+      <a href="/" class="redoBtn">Again.</a>
       <div class="wordCont">
         <h2>
           {{#word}}
@@ -20,8 +21,8 @@
       <div class="alertBar">
         <p>{{alert}}</p>
       </div>
-      <form class="inputForm" action="/game" method="post" >
-        <label for="guess">Letter</label><input autocomplete="off" autofocus="true" maxlength="1" type="text" name="guess" value="" required><p class='guesses'>Guesses: {{guesses}}</p>
+      <form class="inputForm" >
+        <label for="guess">Letter</label><input autocomplete="off" autofocus="true" maxlength="1" type="text" name="guess" value="W"><p class='guesses'>Guesses: {{guesses}}</p>
       </form>
       <div class="usedLetters">
         <h3>Guessed:</h3>

@@ -1,14 +1,7 @@
-//Dictionary array - pull random word
-//Chosen Word gets split into Word array to reference against.
-//alphabet array - each letter will be an object with "USED" property
-//when guessing a letter, input into a form, submit, check USED?->check if in ChosenWord->changed USED to true
-//if a correct letter is guessed, reveal that letter in the mystery word, add to used display.
-//incorrect letter, add to used display, remove a guessed
-
 const express = require('express');
 const app = express();
 const dal = require('./dal.js');
-const alpabet = require('./alpha.js')
+const alphabet = require('./alpha.js')
 const chalk = require('chalk');
 const session = require('express-session');
 const mustache = require('mustache-express');
@@ -32,38 +25,59 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {maxAge: null},
-  sesh_word: []
+  seshObj: {
+    word: [],
+    guessCount: 8
+  }
 }))
 
 
 ////////routes////
 
 app.get('/', function(req, res) {
-  if(req.session.sesh_word){
+  if(req.session.word){
     res.redirect('/game')
   } else {
     res.render('home');
   }
-  
 })
 
-app.post('/', function(req, res){
+app.post('/', function(req, res){ //EASY
   let word = dal.getRandomWord();
-  req.session.sesh_word = word;
+  req.session.seshObj= {
+    word: [],
+    guessCount: 8,
+    alert: ''
+  }
+  req.session.seshObj.word = word;
   res.redirect('/game');
 })
 
 app.get('/game', function(req, res){
-  let word = req.session.sesh_word
-  res.render('game', {word: word});
+  let word = req.session.seshObj.word
+  res.render('game', { word: word, guesses: req.session.seshObj.guessCount, alert: req.session.seshObj.alert });
 })
 
 app.post('/game', function(req, res){
   let guess = req.body.guess;
-  objArr = dal.checkLetter(guess);
-  console.log(objArr);
-  res.render('game', { word: objArr, letters: dal.alphabet  });
-})
+  if(dal.checkAlphabet(guess)==true){
+    if(dal.checkMystWord( req.session.seshObj.word, guess)==false){
+      req.session.seshObj.guessCount--;
+      req.session.seshObj.alert = 'Nah.'
+    } else {
+      req.session.seshObj.alert = ''
+    }
+  }
+  if(req.session.seshObj.guessCount == 0){
+    req.session.seshObj.alert = 'Lose.';
+    res.render('lose', { word: req.session.seshObj.word, letters: dal.alphabet, guesses: req.session.seshObj.guessCount, alert: req.session.seshObj.alert })
+  } else if (dal.finished(req.session.seshObj.word) == true){
+    req.session.seshObj.alert = 'Win.';
+    res.render('win', { word: req.session.seshObj.word, letters: dal.alphabet, guesses: req.session.seshObj.guessCount, alert: req.session.seshObj.alert });
+  } else {
+    res.render('game', { word: req.session.seshObj.word, letters: dal.alphabet, guesses: req.session.seshObj.guessCount, alert: req.session.seshObj.alert });
+  }
+})  //omg ^
 
 app.listen(3000, function(req,res){
   console.log('Word Game started on 3000.');

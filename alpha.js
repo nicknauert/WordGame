@@ -257,7 +257,7 @@ module.exports = [
   print: function() {
     if (this.used === true) {
       this.display = this.id;
-      return this.display + ', '
+      return this.display + ' / '
     }
   },
   display: ''
