@@ -1,12 +1,9 @@
 const fs = require('fs');
 const chalk = require('chalk');
-
 const alphabet = require('./alpha');
 const session = require('express-session');
 const express = require('express');
 const dict = fs.readFileSync('/usr/share/dict/words', 'utf-8').toLowerCase().split('\n');
-
-
 
 
 function getRandomWord(){

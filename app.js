@@ -6,7 +6,7 @@ const chalk = require('chalk');
 const session = require('express-session');
 const mustache = require('mustache-express');
 const bodyParser = require('body-parser');
-
+const negative = require('./no.js')
 
 ////////sets////
 
@@ -63,7 +63,8 @@ app.post('/game', function(req, res){
   if(dal.checkAlphabet(guess)==true){
     if(dal.checkMystWord( req.session.seshObj.word, guess)==false){
       req.session.seshObj.guessCount--;
-      req.session.seshObj.alert = 'Nah.'
+      let number = Math.floor(Math.random() * negative.length)
+      req.session.seshObj.alert = negative[number];
     } else {
       req.session.seshObj.alert = ''
     }

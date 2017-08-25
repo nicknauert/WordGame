@@ -126,6 +126,10 @@ input:focus {
   text-transform: uppercase;
 }
 
+.guesses {
+  color: #d11982;
+}
+
 .redoBtn {
   position: absolute;
   top: 60px;
@@ -134,4 +138,8 @@ input:focus {
   text-decoration: none;
   color: #9fdadd;
   border-radius: 5px;
+}
+
+.redoBtn:hover {
+  background-color: #f11693;
 }
