@@ -68,6 +68,8 @@ app.post('/game', function(req, res){
     } else {
       req.session.seshObj.alert = ''
     }
+  } else {
+    req.session.seshObj.alert = 'Twice?'
   }
   if(req.session.seshObj.guessCount == 0){
     req.session.seshObj.alert = 'Lose.';
